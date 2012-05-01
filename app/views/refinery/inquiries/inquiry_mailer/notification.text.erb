@@ -7,6 +7,9 @@
 <%=raw t('.from') %>: <%= @inquiry.name %>
 <%=raw t('.email') %>: <%= @inquiry.email %>
 <%=raw t('.phone') %>: <%= @inquiry.phone %>
+<% @inquiry.custom_attributes.each do |name, value| -%>
+<%=raw name.to_s.titleize %>: <%= value %>
+<% end -%>
 <%=raw t('.message') %>:
 <%=strip_tags(@inquiry.message) %>
 

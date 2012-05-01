@@ -54,6 +54,12 @@
         </td>
       </tr>
     <% end %>
+    <% @inquiry.custom_attributes.each do |name, value| %>
+    <tr>
+      <td><strong><%= name.to_s.titleize %></strong></td>
+      <td><%= value %></td>
+    </tr>
+    <% end %>
     <tr>
       <td>
         <strong><%= t('.date') %></strong>
