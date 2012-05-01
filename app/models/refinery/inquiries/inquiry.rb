@@ -24,14 +24,14 @@ module Refinery
         include_spam ? limit(number) : ham.limit(number)
       end
       
-      def self.custom_attributes
+      def self.custom_attribute_configs
         Inquiries.custom_inquiry_attributes
       end
-      def custom_attributes
-        self.class.custom_attributes
+      def self.custom_attribute_names
+        custom_attribute_configs.keys
       end
       
-      custom_attributes.each do |attribute, config|
+      self.custom_attribute_configs.each do |attribute, config|
         logger.debug "Custom Inquiry attribute: #{attribute}"
         
         attribute_name = attribute.to_sym     
@@ -41,13 +41,27 @@ module Refinery
         attr_accessible(attribute)
       end
       
-      if (attrs_with_defaults = custom_attributes.reject {|key, config| config[:default].nil? })
+      if (attrs_with_defaults = self.custom_attribute_configs.reject {|key, config| config[:default].nil? })
         define_method(:init_custom_attributes) do
           attrs_with_defaults.each do |attribute, config|
             self.send("#{attribute}=", config[:default])
           end
         end
         after_initialize :init_custom_attributes
+      end
+      
+      # Returns all custom attribute names as array of symbols
+      def custom_attribute_names
+        self.class.custom_attribute_names
+      end
+      
+      # Returns names and values of all custom attributes
+      # as a hash in the format: {:attr1 => value, :attr2 => value, ...}
+      def custom_attributes
+        custom_attribute_names.inject({}) do |values, name|
+          values[name] = self.send(name)
+          values
+        end
       end
 
     end
