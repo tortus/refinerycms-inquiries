@@ -10,7 +10,7 @@ module Refinery
 
       validates :name, :presence => true
       validates :message, :presence => true
-      validates :email, :format=> { :with =>  /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i }
+      validates :email, :format=> { :with =>  /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
 
       acts_as_indexed :fields => [:name, :email, :message, :phone]
       
