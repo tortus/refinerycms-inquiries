@@ -5,4 +5,7 @@ Refinery::Inquiries.configure do |config|
   # Configure custom attributes (saved in serialized "custom_store" column).
   # You may use the format: {:attribute_name => {:default => 'hello'}}
   # config.custom_inquiry_attributes = <%= Refinery::Inquiries.custom_inquiry_attributes.inspect %>
+
+  # Deliver notifications even for spam
+  # config.deliver_spam_notifications = <%= Refinery::Inquiries.deliver_spam_notifications %>
 end

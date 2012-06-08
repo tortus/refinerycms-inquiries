@@ -16,7 +16,7 @@ module Refinery
         @inquiry = ::Refinery::Inquiries::Inquiry.new(params[:inquiry])
 
         if @inquiry.save
-          if @inquiry.ham?
+          if ::Refinery::Inquiries.deliver_spam_notifications or @inquiry.ham?
             begin
               ::Refinery::Inquiries::InquiryMailer.notification(@inquiry, request).deliver
             rescue
