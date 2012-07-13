@@ -3,7 +3,19 @@ Refinery::Inquiries.configure do |config|
   # config.show_contact_privacy_link = <%= Refinery::Inquiries.show_contact_privacy_link.inspect %>
 
   # Configure custom attributes (saved in serialized "custom_store" column).
-  # You may use the format: {:attribute_name => {:default => 'hello'}}
+  # You may use this format (all settings are completely optional):
+  # {
+  #   :my_attribute => {
+  #     :default => 'hello',
+  #     :label => 'My Attribute'
+  #     :placeholder => '...',
+  #     :validates => {...}
+  #   },
+  #   :another_attribute => {...}
+  # }
+  #
+  # The :validates hash will be passed as the second argument to "validates :my_attribute, ..."
+  #
   # config.custom_inquiry_attributes = <%= Refinery::Inquiries.custom_inquiry_attributes.inspect %>
 
   # Deliver notifications even for spam
