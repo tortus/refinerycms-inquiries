@@ -18,6 +18,12 @@
         <%= f.label :phone, :class => 'placeholder-fallback' %>
         <%= f.text_field :phone, :class => 'text phone', :placeholder => t('phone', :scope => 'activerecord.attributes.refinery/inquiries/inquiry') %>
       </div>
+      <% ::Refinery::Inquiries::Inquiry.custom_attribute_configs.each do |attr_name, config| -%>
+      <div class="field">
+        <%= f.label attr_name, config[:label], :class => 'placeholder-fallback' %>
+        <%= f.text_field attr_name, :class => 'text', :required => config[:required] ? 'required' : '', :placeholder => config[:placeholder] %>
+      </div>
+      <% end -%>
       <div class='field message_field'>
         <%= f.required_label :message, :class => 'placeholder-fallback' %>
         <%= f.text_area :message, :rows => 8, :required => 'required', :placeholder => t('message', :scope => 'activerecord.attributes.refinery/inquiries/inquiry') %>
