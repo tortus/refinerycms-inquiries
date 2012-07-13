@@ -43,7 +43,7 @@ module Refinery
           end
 
           if config[:validates].is_a? Hash
-            self.validates(attribute_name, config[:validates])
+            validates attribute_name, config[:validates]
           end
         end
       end
