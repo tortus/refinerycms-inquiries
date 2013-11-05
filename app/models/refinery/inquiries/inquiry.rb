@@ -6,11 +6,7 @@ module Refinery
                    :email_field => :email,
                    :author_field => :name,
                    :other_fields => [:phone],
-                   :extra_spam_words => extra_spam_words
-
-      def self.extra_spam_words
-        %w()
-      end
+                   :extra_spam_words => Refinery::Inquiries.extra_spam_words
 
       validates :name, :presence => true
       validates :message, :presence => true
