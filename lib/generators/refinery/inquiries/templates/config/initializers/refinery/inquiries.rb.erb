@@ -19,6 +19,6 @@ Refinery::Inquiries.configure do |config|
   #
   # config.custom_inquiry_attributes = <%= Refinery::Inquiries.custom_inquiry_attributes.inspect %>
 
-  # Deliver notifications even for spam
-  # config.deliver_spam_notifications = <%= Refinery::Inquiries.deliver_spam_notifications %>
+  # Configure whether inquiries marked as spam should also send a notification mail
+  # config.send_notifications_for_inquiries_marked_as_spam = <%= Refinery::Inquiries.send_notifications_for_inquiries_marked_as_spam.inspect %>
 end
