@@ -6,10 +6,12 @@ module Refinery
     config_accessor :custom_inquiry_attributes
     config_accessor :send_notifications_for_inquiries_marked_as_spam
     config_accessor :extra_spam_words
+    config_accessor :use_recaptcha
 
     self.show_contact_privacy_link = true
     self.custom_inquiry_attributes = {}
     self.send_notifications_for_inquiries_marked_as_spam = false
     self.extra_spam_words = []
+    self.use_recaptcha = false
   end
 end
