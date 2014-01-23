@@ -48,8 +48,7 @@ module Refinery
         end
       end
 
-      if (attrs_with_defaults = custom_attribute_configs.select {|key, config| config[:default].present? })
-          && attrs_with_defaults.any?
+      if (attrs_with_defaults = custom_attribute_configs.select {|key, config| config[:default].present? }) && attrs_with_defaults.any?
         define_method(:init_custom_attributes) do
           attrs_with_defaults.each do |attribute, config|
             self.send("#{attribute}=", config[:default])
