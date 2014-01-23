@@ -15,7 +15,7 @@ module Refinery
       def create
         @inquiry = ::Refinery::Inquiries::Inquiry.new(params[:inquiry])
 
-        if @inquiry.save
+        if captcha_passed? && @inquiry.save
           if @inquiry.ham? || Refinery::Inquiries.send_notifications_for_inquiries_marked_as_spam
             begin
               ::Refinery::Inquiries::InquiryMailer.notification(@inquiry, request).deliver
@@ -40,6 +40,14 @@ module Refinery
 
       def find_page
         @page = ::Refinery::Page.find_by_link_url("/contact")
+      end
+
+      def captcha_passed?
+        if ::Refinery::Inquiries.use_recaptcha
+          verify_recaptcha(:model => @inquiry, :message => "There was a problem with your CAPTCHA input, please try again.")
+        else
+          true
+        end
       end
 
     end
