@@ -42,13 +42,14 @@ module Refinery
             config[:label] ||= attribute_name.to_s.titleize
           end
 
-          if config[:validates].is_a? Hash
+          if config[:validates].kind_of?(Hash)
             validates attribute_name, config[:validates]
           end
         end
       end
 
-      if (attrs_with_defaults = custom_attribute_configs.reject {|key, config| config[:default].nil? }) && attrs_with_defaults.any?
+      if (attrs_with_defaults = custom_attribute_configs.select {|key, config| config[:default].present? })
+          && attrs_with_defaults.any?
         define_method(:init_custom_attributes) do
           attrs_with_defaults.each do |attribute, config|
             self.send("#{attribute}=", config[:default])
