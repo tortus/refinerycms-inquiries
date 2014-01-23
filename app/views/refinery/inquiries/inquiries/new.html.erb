@@ -34,6 +34,7 @@
         <%= f.submit t('.send') %>
         <%= link_to t('.privacy_policy'), "/pages/privacy-policy", :id => "privacy_link" if Refinery::Inquiries.show_contact_privacy_link %>
       </div>
+      <%= recaptcha_tags if ::Refinery::Inquiries.use_recaptcha %>
     <% end %>
   </div>
 <% end %>
