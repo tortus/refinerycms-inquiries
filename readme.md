@@ -2,11 +2,19 @@
 
 ![Refinery Inquiries](http://refinerycms.com/system/images/BAhbBlsHOgZmSSIqMjAxMS8wNS8wMS8wNF81MF8wMV81MDlfaW5xdWlyaWVzLnBuZwY6BkVU/inquiries.png)
 
-### Gem Installation using Bundler (The very best way)
+## Customizations in this fork
 
-Include the latest [gem](http://rubygems.org/gems/refinerycms-inquiries) into your Refinery CMS application's Gemfile:
+**SORRY, we have not yet updated our sites using this gem to Refinery 2.1, so this fork is only up to date with 2-0-stable.**
 
-    gem 'refinerycms-inquiries', '~> 2.0.0'
+All of these options can be easily found in the inquiries initializer, complete with examples:
+
+* Add arbitrary custom inquiry fields (serialized to a single text field).
+* Recaptcha gem support. (Optional, requires recatcha gem: https://github.com/ambethia/recaptcha)
+* Add ability to configure extra_spam_words in initializer, instead of by monkey-patching Inquiry (which actually wouldn't work, because there is no way to intercept the filters_spam method call).
+
+### Gem Installation
+
+    gem 'refinerycms-inquiries', :github => 'tortus/refinerycms-inquiries', :branch => '2-0-stable'
 
 Then type the following at command line inside your Refinery CMS application's root directory:
 
