@@ -11,13 +11,13 @@ module Refinery
                    :other_fields => [:phone],
                    :extra_spam_words => Refinery::Inquiries.extra_spam_words
 
-      validates :name, :presence => true
-      validates :email, :format => { :with =>  /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
-      validates :message, :presence => true
+      validates :name, presence: true, length: { maximum: 255 }
+      validates :email, format: {
+        with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+      }, length: { maximum: 255 }
+      validates :message, presence: true
 
-      default_scope :order => 'created_at DESC'
-
-      attr_accessible :name, :phone, :message, :email
+      default_scope { order('created_at DESC') }
 
       def self.latest(number = 7, include_spam = false)
         include_spam ? limit(number) : ham.limit(number)
