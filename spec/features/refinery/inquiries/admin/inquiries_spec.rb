@@ -4,12 +4,13 @@ module Refinery
   module Inquiries
     module Admin
       describe Inquiry do
-        login_refinery_user
+        refinery_login_with :refinery_user
 
         let!(:inquiry) do
-          Factory(:inquiry, :name => "David Jones",
-                            :email => "dave@refinerycms.com",
-                            :message => "Hello, I really like your website.  Was it hard to build and maintain or could anyone do it?")    
+          FactoryGirl.create(:inquiry,
+            :name => "David Jones",
+            :email => "dave@refinerycms.com",
+            :message => "Hello, I really like your website. Was it hard to build and maintain or could anyone do it?")
         end
 
         context "when no" do
@@ -38,13 +39,13 @@ module Refinery
           specify "in the side pane" do
             within "#actions" do
               page.should have_content("Inbox")
-              page.should have_selector("a[href='/refinery/inquiries']")
+              page.should have_selector("a[href='/#{Refinery::Core.backend_route}/inquiries']")
               page.should have_content("Spam")
-              page.should have_selector("a[href='/refinery/inquiries/spam']")
+              page.should have_selector("a[href='/#{Refinery::Core.backend_route}/inquiries/spam']")
               page.should have_content("Update who gets notified")
-              page.should have_selector("a[href*='/refinery/inquiries/settings/inquiry_notification_recipients/edit']")
+              page.should have_selector("a[href*='/#{Refinery::Core.backend_route}/inquiries/settings/inquiry_notification_recipients/edit']")
               page.should have_content("Edit confirmation email")
-              page.should have_selector("a[href*='/refinery/inquiries/settings/inquiry_confirmation_body/edit']")
+              page.should have_selector("a[href*='/#{Refinery::Core.backend_route}/inquiries/settings/inquiry_confirmation_body/edit']")
             end
           end
         end
@@ -53,7 +54,7 @@ module Refinery
           it "shows inquiry list" do
             visit refinery.inquiries_admin_inquiries_path
 
-            page.should have_content("David Jones said Hello, I really like your website. Was it hard to build ...")
+            page.should have_content("David Jones said Hello, I really like your website. Was it hard to build a...")
           end
         end
 
@@ -68,9 +69,9 @@ module Refinery
             within "#actions" do
               page.should have_content("Age")
               page.should have_content("Back to all Inquiries")
-              page.should have_selector("a[href='/refinery/inquiries']")
+              page.should have_selector("a[href='/#{Refinery::Core.backend_route}/inquiries']")
               page.should have_content("Remove this inquiry forever")
-              page.should have_selector("a[href='/refinery/inquiries/#{inquiry.id}']")
+              page.should have_selector("a[href='/#{Refinery::Core.backend_route}/inquiries/#{inquiry.id}']")
             end
           end
         end
@@ -97,7 +98,7 @@ module Refinery
               click_link "Spam (1)"
             end
 
-            page.should have_content("David Jones said Hello, I really like your website. Was it hard to build ...")
+            page.should have_content("David Jones said Hello, I really like your website. Was it hard to build a...")
           end
         end
 

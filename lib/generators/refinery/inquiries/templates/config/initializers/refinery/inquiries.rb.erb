@@ -19,9 +19,18 @@ Refinery::Inquiries.configure do |config|
   #
   # config.custom_inquiry_attributes = <%= Refinery::Inquiries.custom_inquiry_attributes.inspect %>
 
+  # Configure whether to show phone number field
+  # config.show_phone_number_field = <%= Refinery::Inquiries.show_phone_number_field.inspect %>
+
+  # Configure whether to show form field placeholders
+  # config.show_placeholders = <%= Refinery::Inquiries.show_placeholders.inspect %>
+
   # Configure whether inquiries marked as spam should also send a notification mail
   # config.send_notifications_for_inquiries_marked_as_spam = <%= Refinery::Inquiries.send_notifications_for_inquiries_marked_as_spam.inspect %>
 
   # Add extra spam keywords
   # config.extra_spam_words = %w()
+
+  # Configure name in 'from' email address
+  # config.from_name = <%= Refinery::Inquiries.from_name.inspect %>
 end

@@ -4,6 +4,8 @@ da:
       refinerycms_inquiries:
         title: Henvendelser
     inquiries:
+      config:
+        from_name: "%{name} [%{site_name}]"
       inquiries:
         new:
           header_message: "Der er et mindre problem"
@@ -22,7 +24,6 @@ da:
             closed: "Henvendelsen '%{inquiry}' er lukket"
             reopened: "Henvendelsen '%{inquiry}' er genåbnet"
           index:
-            search_results_for: "Søgeresultat for '%{query}'"
             no_inquiries: Du har endnu ikke modtaget nogen henvendelser.
           show:
             details: Detaljer
