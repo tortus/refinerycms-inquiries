@@ -34,7 +34,7 @@ module Refinery
           attr_accessible attribute_name
 
           if config[:required] || (config[:validates] && config[:validates][:presence])
-            config[:required] = true unless  Inquiries.custom_inquiry_attributes.has_key?(:required)
+            config[:required] = true unless Inquiries.custom_inquiry_attributes.has_key?(:required)
             config[:label] ||= attribute_name.to_s.titleize + ' *'
           else
             config[:label] ||= attribute_name.to_s.titleize
@@ -46,7 +46,7 @@ module Refinery
         end
       end
 
-      if (attrs_with_defaults =  Inquiries.custom_inquiry_attributes.select {|key, config| config[:default].present? }) && attrs_with_defaults.any?
+      if (attrs_with_defaults = Inquiries.custom_inquiry_attributes.select {|key, config| config[:default].present? }) && attrs_with_defaults.any?
         define_method(:init_custom_attributes) do
           attrs_with_defaults.each do |attribute, config|
             self.send("#{attribute}=", config[:default])
