@@ -9,6 +9,7 @@ module Refinery
     config_accessor :from_name
     config_accessor :custom_inquiry_attributes
     config_accessor :extra_spam_words
+    config_accessor :use_recaptcha
 
     self.show_contact_privacy_link = true
     self.show_phone_number_field = true
@@ -17,5 +18,6 @@ module Refinery
     self.from_name = "no-reply"
     self.custom_inquiry_attributes = {}
     self.extra_spam_words = []
+    self.use_recaptcha = false
   end
 end
