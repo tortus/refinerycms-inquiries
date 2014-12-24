@@ -23,21 +23,18 @@ module Refinery
         include_spam ? limit(number) : ham.limit(number)
       end
 
-      def self.custom_attribute_configs
-        Inquiries.custom_inquiry_attributes
-      end
       def self.custom_attribute_names
-        custom_attribute_configs.keys
+        Inquiries.custom_inquiry_attributes.keys
       end
 
-      if custom_attribute_configs.any?
+      if Inquiries.custom_inquiry_attributes.any?
         store :custom_store, :accessors => custom_attribute_names
 
-        custom_attribute_configs.each do |attribute_name, config|
+        Inquiries.custom_inquiry_attributes.each do |attribute_name, config|
           attr_accessible attribute_name
 
           if config[:required] || (config[:validates] && config[:validates][:presence])
-            config[:required] = true unless custom_attribute_configs.has_key?(:required)
+            config[:required] = true unless Inquiries.custom_inquiry_attributes.has_key?(:required)
             config[:label] ||= attribute_name.to_s.titleize + ' *'
           else
             config[:label] ||= attribute_name.to_s.titleize
@@ -49,7 +46,7 @@ module Refinery
         end
       end
 
-      if (attrs_with_defaults = custom_attribute_configs.select {|key, config| config[:default].present? }) && attrs_with_defaults.any?
+      if (attrs_with_defaults = Inquiries.custom_inquiry_attributes.select {|key, config| config[:default].present? }) && attrs_with_defaults.any?
         define_method(:init_custom_attributes) do
           attrs_with_defaults.each do |attribute, config|
             self.send("#{attribute}=", config[:default])
@@ -58,15 +55,10 @@ module Refinery
         after_initialize :init_custom_attributes
       end
 
-      # Returns all custom attribute names as array of symbols
-      def custom_attribute_names
-        self.class.custom_attribute_names
-      end
-
       # Returns names and values of all custom attributes
       # as a hash in the format: {:attr1 => value, :attr2 => value, ...}
       def custom_attributes
-        custom_attribute_names.inject({}) do |values, name|
+        self.class.custom_attribute_names.inject({}) do |values, name|
           values[name.to_sym] = self.send(name)
           values
         end
