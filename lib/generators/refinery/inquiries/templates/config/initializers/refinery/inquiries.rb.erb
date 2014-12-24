@@ -10,12 +10,13 @@ Refinery::Inquiries.configure do |config|
   #     :default => "hello",
   #     :label => "My Attribute"
   #     :placeholder => "...",
-  #     :validates => {...}
+  #     :validates => {:length => {:maximum => 255}}
   #   },
   #   :another_attribute => {...}
   # }
   #
   # The :validates hash will be passed as the second argument to "validates :my_attribute, ..."
+  # It is recommended to add at least a length sanity check for each attribute.
   #
   # config.custom_inquiry_attributes = <%= Refinery::Inquiries.custom_inquiry_attributes.inspect %>
 
