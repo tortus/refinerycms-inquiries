@@ -42,7 +42,8 @@
         <%= f.submit t('.send') %>
         <%= link_to t('.privacy_policy'), "/pages/privacy-policy", :id => "privacy_link" if Refinery::Inquiries.show_contact_privacy_link %>
       </div>
-      <%= recaptcha_tags(:display => {:theme => 'red'}, :ssl => true) if ::Refinery::Inquiries.use_recaptcha # More themes: https://developers.google.com/recaptcha/docs/customization %>
+      <%= recaptcha_tags(:display => {:theme => 'red'}, :ssl => true) if ::Refinery::Inquiries.use_recaptcha %>
+      <%# More themes: https://developers.google.com/recaptcha/docs/customization %>
     <% end %>
   </div>
 <% end %>
