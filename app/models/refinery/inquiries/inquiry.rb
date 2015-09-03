@@ -12,8 +12,15 @@ module Refinery
       validates :message, :presence => true
       validates :email, :format=> { :with =>  /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
 
+      acts_as_indexed :fields => [:name, :email, :message, :phone]
+
+      default_scope :order => 'created_at DESC'
+
+      attr_accessible :name, :phone, :message, :email
+
       if Refinery::Inquiries.use_honeypot
         attr_accessor Refinery::Inquiries.honeypot_field_name
+        attr_accessible Refinery::Inquiries.honeypot_field_name
 
         validate :honeypot_must_be_blank
 
@@ -25,12 +32,6 @@ module Refinery
 
         private :honeypot_must_be_blank
       end
-
-      acts_as_indexed :fields => [:name, :email, :message, :phone]
-
-      default_scope :order => 'created_at DESC'
-
-      attr_accessible :name, :phone, :message, :email
 
       def self.latest(number = 7, include_spam = false)
         include_spam ? limit(number) : ham.limit(number)
