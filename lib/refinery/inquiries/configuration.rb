@@ -18,6 +18,6 @@ module Refinery
     self.use_recaptcha = false
     self.submit_via_javascript = false
     self.use_honeypot = false
-    self.honeypot_field_name = :first_name
+    self.honeypot_field_name = :subject
   end
 end
