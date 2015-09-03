@@ -11,7 +11,9 @@
                    :object => @inquiry,
                    :include_object_name => true
                  } %>
-      <noscript><p>Please enable JavaScript to submit this form.</p></noscript>
+      <% if Refinery::Inquiries.submit_via_javascript -%>
+        <noscript><p>Please enable JavaScript to submit this form!</p></noscript>
+      <% end -%>
       <div class="field">
         <%= f.required_label :name, :class => 'placeholder-fallback' %>
         <%= f.text_field :name, :class => 'text', :required => 'required', :placeholder => t('name', :scope => 'activerecord.attributes.refinery/inquiries/inquiry') %>
