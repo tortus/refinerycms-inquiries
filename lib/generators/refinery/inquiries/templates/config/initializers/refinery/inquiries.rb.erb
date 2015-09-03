@@ -37,4 +37,7 @@ Refinery::Inquiries.configure do |config|
 
   # Enable Recaptcha gem on inquiry form. Requires recaptcha gem, see: https://github.com/ambethia/recaptcha
   # config.use_recaptcha = <%= Refinery::Inquiries.use_recaptcha %>
+
+  # Require the form to be submitted via JavaScript (may reduce spam at cost of blocking NoScript users).
+  # config.submit_via_javascript = <%= Refinery::Inquiries.submit_via_javascript %>
 end

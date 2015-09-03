@@ -1,0 +1,10 @@
+<% submit_url = local_assigns[:submit_url] || url_for([refinery, :inquiries, @inquiry]) -%>
+<% content_for :javascripts do -%>
+  <script>
+    jQuery(function($) {
+      $('.new_inquiry_form').on('submit', function(event) {
+        $(this).attr('action', "<%= submit_url %>");
+      });
+    });
+  </script>
+<% end if Refinery::Inquiries.submit_via_javascript -%>

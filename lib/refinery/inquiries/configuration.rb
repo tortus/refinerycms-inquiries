@@ -10,6 +10,7 @@ module Refinery
     config_accessor :custom_inquiry_attributes
     config_accessor :extra_spam_words
     config_accessor :use_recaptcha
+    config_accessor :submit_via_javascript
 
     self.show_contact_privacy_link = true
     self.show_phone_number_field = true
