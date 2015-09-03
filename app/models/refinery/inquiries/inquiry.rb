@@ -23,15 +23,15 @@ module Refinery
         attr_accessor Refinery::Inquiries.honeypot_field_name
         attr_accessible Refinery::Inquiries.honeypot_field_name
 
-        validate :honeypot_must_be_blank
+        before_save :check_honeypot
 
-        def honeypot_must_be_blank
+        def check_honeypot
           if send(Refinery::Inquiries.honeypot_field_name).present?
-            errors.add(Refinery::Inquiries.honeypot_field_name, "must be left blank")
+            self.spam = true
           end
         end
 
-        private :honeypot_must_be_blank
+        private :check_honeypot
       end
 
       def self.latest(number = 7, include_spam = false)
