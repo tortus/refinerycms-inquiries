@@ -1,13 +1,27 @@
+<% form_url = url_for([refinery, :inquiries, @inquiry]) -%>
+<%= render "/refinery/inquiries/inquiries/handle_form_submit", :submit_url => form_url %>
+
 <% content_for :body do %>
   <%= raw @page.content_for(Refinery::Pages.default_parts.first.to_sym) if Refinery::Pages.default_parts.any? %>
 
   <div class='inquiries'>
-    <%= form_for [refinery, :inquiries, @inquiry] do |f| %>
+    <%= form_for([refinery, :inquiries, @inquiry], :url => (Refinery::Inquiries.submit_via_javascript ? "/notfound" : form_url), :class => "new_inquiry_form") do |f| %>
       <%= render :partial => "/refinery/admin/error_messages",
                  :locals => {
                    :object => @inquiry,
                    :include_object_name => true
                  } %>
+      <% if Refinery::Inquiries.submit_via_javascript -%>
+        <noscript><p><%= t('enable_javascript') %></p></noscript>
+      <% end -%>
+
+      <% if Refinery::Inquiries.use_honeypot -%>
+        <div class="field" style="<%= 'display:none;' unless f.object.send(Refinery::Inquiries.honeypot_field_name).present? %>">
+          <label><%= t('leave_this_blank') %>:</label>
+          <%= f.text_field Refinery::Inquiries.honeypot_field_name, :class => "hidden" %>
+        </div>
+      <% end %>
+
       <div class="field">
         <%= f.required_label :name, :class => 'placeholder-fallback' %>
         <%= f.text_field :name, :class => 'text', :required => 'required',

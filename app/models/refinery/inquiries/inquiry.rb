@@ -19,6 +19,21 @@ module Refinery
 
       attr_accessible :name, :phone, :message, :email
 
+      if Refinery::Inquiries.use_honeypot
+        attr_accessor Refinery::Inquiries.honeypot_field_name
+        attr_accessible Refinery::Inquiries.honeypot_field_name
+
+        validate :honeypot_must_be_blank
+
+        def honeypot_must_be_blank
+          if send(Refinery::Inquiries.honeypot_field_name).present?
+            errors.add(Refinery::Inquiries.honeypot_field_name, "must be left blank")
+          end
+        end
+
+        private :honeypot_must_be_blank
+      end
+
       def self.latest(number = 7, include_spam = false)
         include_spam ? limit(number) : ham.limit(number)
       end
