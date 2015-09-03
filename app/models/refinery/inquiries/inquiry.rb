@@ -19,6 +19,21 @@ module Refinery
 
       default_scope { order('created_at DESC') }
 
+      if Refinery::Inquiries.use_honeypot
+        attr_accessor Refinery::Inquiries.honeypot_field_name
+        attr_accessible Refinery::Inquiries.honeypot_field_name
+
+        before_save :check_honeypot
+
+        def check_honeypot
+          if send(Refinery::Inquiries.honeypot_field_name).present?
+            self.spam = true
+          end
+        end
+
+        private :check_honeypot
+      end
+
       def self.latest(number = 7, include_spam = false)
         include_spam ? limit(number) : ham.limit(number)
       end

@@ -9,6 +9,9 @@ en:
         from_name: "%{name} - %{site_name}"
       inquiries:
         form:
+          enable_javascript: Please enable JavaScript to submit this form!
+          leave_this_blank: Leave this blank
+        new:
           send: Send message
           privacy_policy: We value your privacy
       admin:

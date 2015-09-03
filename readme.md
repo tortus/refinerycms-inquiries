@@ -9,6 +9,8 @@ All of these options can be easily found in the inquiries initializer, complete 
 * Add arbitrary custom inquiry fields (serialized to a single text field).
 * Recaptcha gem support. (Optional, requires recatcha gem: https://github.com/ambethia/recaptcha)
 * Add ability to configure extra_spam_words in initializer, instead of by monkey-patching Inquiry (which actually wouldn't work, because there is no way to intercept the filters_spam method call).
+# Add option to require form to be submitted via JavaScript, to make it harder for spam bots.
+# Add option to add a "honey pot" field to the form that a spam bot won't be able to resist filling in.
 
 ```ruby
 gem 'refinerycms-inquiries', '~> 3.0.0'
