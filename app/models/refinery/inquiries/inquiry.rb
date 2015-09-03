@@ -12,6 +12,20 @@ module Refinery
       validates :message, :presence => true
       validates :email, :format=> { :with =>  /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
 
+      if Refinery::Inquiries.use_honeypot
+        attr_accessor Refinery::Inquiries.honeypot_field_name
+
+        validate :honeypot_must_be_blank
+
+        def honeypot_must_be_blank
+          if send(Refinery::Inquiries.honeypot_field_name).present?
+            errors.add(Refinery::Inquiries.honeypot_field_name, "Must be left blank")
+          end
+        end
+
+        private :honeypot_must_be_blank
+      end
+
       acts_as_indexed :fields => [:name, :email, :message, :phone]
 
       default_scope :order => 'created_at DESC'

@@ -12,8 +12,16 @@
                    :include_object_name => true
                  } %>
       <% if Refinery::Inquiries.submit_via_javascript -%>
-        <noscript><p>Please enable JavaScript to submit this form!</p></noscript>
+        <noscript><p><%= t('enable_javascript') %></p></noscript>
       <% end -%>
+
+      <% if Refinery::Inquiries.use_honeypot -%>
+        <div class="field" style="display:none;">
+          <label><%= t('leave_this_blank') %>:</label>
+          <%= f.text_field Refinery::Inquiries.honeypot_field_name, :class => "hidden" %>
+        </div>
+      <% end %>
+
       <div class="field">
         <%= f.required_label :name, :class => 'placeholder-fallback' %>
         <%= f.text_field :name, :class => 'text', :required => 'required', :placeholder => t('name', :scope => 'activerecord.attributes.refinery/inquiries/inquiry') %>

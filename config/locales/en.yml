@@ -7,6 +7,8 @@ en:
     inquiries:
       inquiries:
         new:
+          enable_javascript: Please enable JavaScript to submit this form!
+          leave_this_blank: Leave this blank
           send: Send message
           privacy_policy: We value your privacy
       admin:
