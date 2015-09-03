@@ -26,7 +26,7 @@ module Refinery
 
         def honeypot_must_be_blank
           if send(Refinery::Inquiries.honeypot_field_name).present?
-            errors.add(Refinery::Inquiries.honeypot_field_name, "Must be left blank")
+            errors.add(Refinery::Inquiries.honeypot_field_name, "must be left blank")
           end
         end
 
