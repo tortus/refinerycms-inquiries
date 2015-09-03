@@ -17,7 +17,7 @@
 
       <% if Refinery::Inquiries.use_honeypot -%>
         <div class="field" style="<%= 'display:none;' unless f.object.send(Refinery::Inquiries.honeypot_field_name).present? %>">
-          <label><%= t('leave_this_blank') %>:</label>
+          <%= f.label Refinery::Inquiries.honeypot_field_name, t('leave_this_blank') %>
           <%= f.text_field Refinery::Inquiries.honeypot_field_name, :class => "hidden", :autocomplete => "off", :autofill => "off" %>
         </div>
       <% end %>
