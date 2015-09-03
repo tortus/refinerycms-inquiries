@@ -1,3 +1,10 @@
 .DS_Store
+Thumbs.db
+._*
 Gemfile.lock
 spec/dummy
+
+# Local Gemfile for developing without sharing dependencies
+.gemfile
+
+.ruby-version
