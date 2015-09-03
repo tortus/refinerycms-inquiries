@@ -6,9 +6,9 @@ sk:
         description: Zabezpečuje kontaktný formulár a uchováva zaslané otázky.
     inquiries:
       config:
-        from_name: "%{name} [%{site_name}]"
+        from_name: "%{name} - %{site_name}"
       inquiries:
-        new:
+        form:
           send: Odoslať správu
           privacy_policy: Vážime si Vaše súkromie
       admin:

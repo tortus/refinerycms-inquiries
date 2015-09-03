@@ -4,17 +4,15 @@
 
 ## Customizations in this fork
 
-**SORRY, we have not yet updated our sites using this gem to Refinery 2.1, so this fork is only up to date with 2-0-stable.**
-
 All of these options can be easily found in the inquiries initializer, complete with examples:
 
 * Add arbitrary custom inquiry fields (serialized to a single text field).
 * Recaptcha gem support. (Optional, requires recatcha gem: https://github.com/ambethia/recaptcha)
 * Add ability to configure extra_spam_words in initializer, instead of by monkey-patching Inquiry (which actually wouldn't work, because there is no way to intercept the filters_spam method call).
 
-### Gem Installation
-
-    gem 'refinerycms-inquiries', :github => 'tortus/refinerycms-inquiries', :branch => '2-0-stable'
+```ruby
+gem 'refinerycms-inquiries', '~> 3.0.0'
+```
 
 Then type the following at command line inside your Refinery CMS application's root directory:
 
@@ -30,6 +28,17 @@ To install the migrations, run:
 Add pages to the database and you're done:
 
     rake db:seed
+
+#### Optionally include the stylesheet.
+
+Next, you can include the stylesheet that improves the form's display a bit,
+and also adds an asterisk to each `required` label: `Name *` instead of `Name`.
+
+To do this, include it in your `application.css` manifest file and insert:
+
+```css
+//= require refinery/inquiries/inquiries
+```
 
 ## About
 

@@ -5,50 +5,7 @@
   <%= raw @page.content_for(Refinery::Pages.default_parts.first.to_sym) if Refinery::Pages.default_parts.any? %>
 
   <div class='inquiries'>
-    <%= form_for([refinery, :inquiries, @inquiry], :url => (Refinery::Inquiries.submit_via_javascript ? nil : form_url), :class => "new_inquiry_form") do |f| %>
-      <%= render :partial => "/refinery/admin/error_messages",
-                 :locals => {
-                   :object => @inquiry,
-                   :include_object_name => true
-                 } %>
-      <noscript><p>Please enable JavaScript to submit this form.</p></noscript>
-      <div class="field">
-        <%= f.required_label :name, :class => 'placeholder-fallback' %>
-        <%= f.text_field :name, :class => 'text', :required => 'required',
-          :placeholder => (t('name', :scope => 'activerecord.attributes.refinery/inquiries/inquiry') if Refinery::Inquiries.show_placeholders) %>
-      </div>
-      <div class="field">
-        <%= f.required_label :email, :class => 'placeholder-fallback' %>
-        <%= f.email_field :email, :class => 'text email', :required => 'required',
-          :placeholder => (t('email', :scope => 'activerecord.attributes.refinery/inquiries/inquiry') if Refinery::Inquiries.show_placeholders) %>
-      </div>
-      <% ::Refinery::Inquiries.custom_inquiry_attributes.each do |attr_name, config| -%>
-      <div class="field">
-        <%= f.label attr_name, config[:label], :class => 'placeholder-fallback' %>
-        <%= f.text_field attr_name, :class => 'text', :required => config[:required] ? 'required' : '', :placeholder => config[:placeholder] %>
-      </div>
-      <% end -%>
-
-      <% if Refinery::Inquiries.show_phone_number_field %>
-        <div class="field">
-          <%= f.label :phone, :class => 'placeholder-fallback' %>
-          <%= f.text_field :phone, :class => 'text phone',
-            :placeholder => (t('phone', :scope => 'activerecord.attributes.refinery/inquiries/inquiry') if Refinery::Inquiries.show_placeholders) %>
-        </div>
-      <% end %>
-
-      <div class='field message_field'>
-        <%= f.required_label :message, :class => 'placeholder-fallback' %>
-        <%= f.text_area :message, :rows => 8, :required => 'required',
-          :placeholder => (t('message', :scope => 'activerecord.attributes.refinery/inquiries/inquiry') if Refinery::Inquiries.show_placeholders) %>
-      </div>
-      <div class="actions">
-        <%= f.submit t('.send') %>
-        <%= link_to t('.privacy_policy'), "/pages/privacy-policy", :id => "privacy_link" if Refinery::Inquiries.show_contact_privacy_link %>
-      </div>
-      <%= recaptcha_tags(:display => {:theme => 'red'}, :ssl => true) if ::Refinery::Inquiries.use_recaptcha %>
-      <%# More themes: https://developers.google.com/recaptcha/docs/customization %>
-    <% end %>
+    <%= render "/refinery/inquiries/inquiries/form", inquiry: @inquiry %>
   </div>
 <% end %>
 <%= render "/refinery/content_page" %>

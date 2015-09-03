@@ -6,9 +6,9 @@ bg:
         description: Осигурява форма за контакт и съхранение на запитвания
     inquiries:
       config:
-        from_name: "%{name} [%{site_name}]"
+        from_name: "%{name} - %{site_name}"
       inquiries:
-        new:
+        form:
           send: Изпращане на съобщение
           privacy_policy: Високо ценим Вашите лични данни
       admin:

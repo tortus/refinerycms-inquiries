@@ -11,6 +11,7 @@ module Refinery
     config_accessor :extra_spam_words
     config_accessor :use_recaptcha
     config_accessor :submit_via_javascript
+    config_accessor :post_path, :page_path_new, :page_path_thank_you
 
     self.show_contact_privacy_link = true
     self.show_phone_number_field = true
@@ -20,5 +21,8 @@ module Refinery
     self.custom_inquiry_attributes = {}
     self.extra_spam_words = []
     self.use_recaptcha = false
+    self.post_path = "/contact"
+    self.page_path_new = "/contact"
+    self.page_path_thank_you = "/contact/thank_you"
   end
 end

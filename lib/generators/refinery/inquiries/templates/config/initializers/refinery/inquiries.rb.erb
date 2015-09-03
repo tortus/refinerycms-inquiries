@@ -35,9 +35,16 @@ Refinery::Inquiries.configure do |config|
   # Configure name in 'from' email address
   # config.from_name = <%= Refinery::Inquiries.from_name.inspect %>
 
+<<<<<<< HEAD
   # Enable Recaptcha gem on inquiry form. Requires recaptcha gem, see: https://github.com/ambethia/recaptcha
   # config.use_recaptcha = <%= Refinery::Inquiries.use_recaptcha %>
 
   # Require the form to be submitted via JavaScript (may reduce spam at cost of blocking NoScript users).
   # config.submit_via_javascript = <%= Refinery::Inquiries.submit_via_javascript %>
+=======
+  # Configure the URLs to use for the inquiry functionality.
+  # config.post_path           = <%= Refinery::Inquiries.post_path.inspect %>
+  # config.page_path_new       = <%= Refinery::Inquiries.page_path_new.inspect %>
+  # config.page_path_thank_you = <%= Refinery::Inquiries.page_path_thank_you.inspect %>
+>>>>>>> upstream/master
 end
