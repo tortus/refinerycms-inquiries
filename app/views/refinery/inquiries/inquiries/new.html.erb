@@ -3,7 +3,7 @@
 
 <% content_for :body do %>
   <%= raw @page.content_for(Refinery::Pages.default_parts.first.to_sym) if Refinery::Pages.default_parts.any? %>
-  
+
   <div class='inquiries'>
     <%= form_for([refinery, :inquiries, @inquiry], :url => (Refinery::Inquiries.submit_via_javascript ? nil : form_url), :class => "new_inquiry_form") do |f| %>
       <%= render :partial => "/refinery/admin/error_messages",

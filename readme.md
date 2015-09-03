@@ -26,7 +26,7 @@ To install the migrations, run:
 
     rails generate refinery:inquiries
     rake db:migrate
-    
+
 Add pages to the database and you're done:
 
     rake db:seed
